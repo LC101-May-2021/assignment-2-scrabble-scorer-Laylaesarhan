@@ -71,7 +71,7 @@ let score = 0;
 
 
 for (let i = 0; i < word.length; i++){
- score += newPointStructure[word[i].toUpperCase()];
+ score += newPointStructure[word[i].toLowerCase()];
 }
 return score; 
 }
@@ -101,7 +101,7 @@ function transform(object) {
   let newObject = {};
   for (let score in object){
     for (let i = 0; i < object[score].length; i++){
-      newObject[object[score][i]] = Number(score);
+      newObject[object[score][i].toLowerCase()] = Number(score);
     }
   }
   
