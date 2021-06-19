@@ -80,13 +80,13 @@ return score;
 const scoringAlgorithms = [
   {name: "Simple Score",
   description:"Each letter is worth 1 point.",
-  scorerFunction:simpleScore},
+  scoringFnction:simpleScore},
   {name:"Bonus Vowels",
   description: "Vowels are 3 pts, consonants are 1 pt.",
-  scorerFunction:vowelBonusScore},
+  scoringFunction:vowelBonusScore},
   {name:"Scrabble",
   description:"The traditional scoring algorithm.",
-  scorerFunction:oldScrabbleScorer}];
+  scoringFunction:oldScrabbleScorer}];
 
 function scorerPrompt() {
  
@@ -109,13 +109,13 @@ function transform(object) {
 };
 
 let newPointStructure = transform(oldPointStructure);
-scoringAlgorithms[2].scorerFunction = scrabbleScore;
+scoringAlgorithms[2].scoringFunction = scrabbleScore;
 
 // call functions here
 function runProgram() {
    let word = initialPrompt();
   let scoringFunction = scorerPrompt();
-  console.log(`Score for '${word}': ` + scoringFunction.scorerFunction(word));
+  console.log(`Score for '${word}': ` + scoringFunction.scoringFunction(word));
 }
 
 
