@@ -35,7 +35,6 @@ function oldScrabbleScorer(word) {
 function initialPrompt() {
   let info = input.question("Let's play some scrabble! Enter a word to score:");
   return info;
-  // console.log("Let's play some scrabble! Enter a word:");
 };
 
 
@@ -69,13 +68,14 @@ let vowelBonusScore = function(word) {
 
 let scrabbleScore = function(word){
 let score = 0;
+
+
 for (let i = 0; i < word.length; i++){
- score += Number(newPointStructure[word[i]])
+ score += newPointStructure[word[i].toUpperCase()];
 }
-return score ; 
-
-
+return score; 
 }
+
 
 const scoringAlgorithms = [
   {name: "Simple Score",
@@ -89,9 +89,9 @@ const scoringAlgorithms = [
   scorerFunction:oldScrabbleScorer}];
 
 function scorerPrompt() {
- console.log("Which scoring algorithm would you like to use? ");
+ 
   for (let i=0; i < scoringAlgorithms.length; i++){
-    console.log(scoringAlgorithms[i].name);
+  
   }
  let scoreChoice = input.question("Enter 0, 1, or 2: ");
  return scoringAlgorithms[scoreChoice];
@@ -101,28 +101,25 @@ function transform(object) {
   let newObject = {};
   for (let score in object){
     for (let i = 0; i < object[score].length; i++){
-      // console.log(object[score][i]);
-      // console.log(score);
-      newObject[object[score][i]] = score;
+      newObject[object[score][i]] = Number(score);
     }
   }
+  
   return newObject;
 };
 
 let newPointStructure = transform(oldPointStructure);
-scoringAlgorithms[2]["scorerFunction"] = scrabbleScore
+scoringAlgorithms[2].scorerFunction = scrabbleScore;
 
 // call functions here
 function runProgram() {
    let word = initialPrompt();
-   scorerPrompt(word);
-  let oldScrabblePoints = oldScrabbleScorer(word);
-  let simplePoints = simpleScore(word);
-  let bonusScorePoints = vowelBonusScore(word);
-  let scorerObject = scorerPrompt();
-  let score = scorerObject.scorerFunction(word);
-  console.log(`The score of ${word} is ${score}`);
- }
+  let scoringFunction = scorerPrompt();
+  console.log(`Score for '${word}': ` + scoringFunction.scorerFunction(word));
+}
+
+
+
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
